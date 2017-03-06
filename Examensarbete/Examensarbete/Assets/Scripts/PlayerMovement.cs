@@ -11,13 +11,13 @@ public class PlayerMovement : MonoBehaviour {
 
 	private bool isJumping;
 
-	private Vector2 jumping = new Vector2(0, 2000);
+	private Vector2 jumping = new Vector2(0, 4000);
 
 	// Use this for initialization
 	void Start () {
 		Physics.gravity = new Vector3 (0, -100.0f, 0);
 
-		playerSpeed = 150.0f;
+		playerSpeed = 100.0f;
 
 		isJumping = false;
 	}
@@ -33,14 +33,11 @@ public class PlayerMovement : MonoBehaviour {
 	public void Jump()
 	{
 
-		//if (isJumping == false) {
-			
-		//	player.transform.Translate (Vector3.up * Time.deltaTime * playerSpeed * 12);
-		//	isJumping = true;
-		//}
-
-		this.GetComponent<Rigidbody> ().velocity = Vector2.zero;
-		this.GetComponent<Rigidbody> ().AddForce (jumping);
+		if (isJumping == false) {
+			this.GetComponent<Rigidbody> ().velocity = Vector2.zero;
+			this.GetComponent<Rigidbody> ().AddForce (jumping);
+			isJumping = true;
+		}
 
 	}
 
@@ -73,9 +70,9 @@ public class PlayerMovement : MonoBehaviour {
 
 	void CheckGroundCollision()
 	{
-		if (Physics.Raycast(player.transform.position, Vector3.down, 10)) {
-			isJumping = false;
-		}
+			if (Physics.Raycast(player.transform.position, Vector3.down, 15)) {
+				isJumping = false;
+			}
 	}
 
 }
