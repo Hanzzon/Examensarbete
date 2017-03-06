@@ -11,11 +11,13 @@ public class PlayerMovement : MonoBehaviour {
 
 	private bool isJumping;
 
+	private Vector2 jumping = new Vector2(0, 2000);
+
 	// Use this for initialization
 	void Start () {
 		Physics.gravity = new Vector3 (0, -100.0f, 0);
 
-		playerSpeed = 100.0f;
+		playerSpeed = 150.0f;
 
 		isJumping = false;
 	}
@@ -23,9 +25,6 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-
-		Gravity ();
-
 		Movement ();
 
 		CheckGroundCollision ();
@@ -34,21 +33,15 @@ public class PlayerMovement : MonoBehaviour {
 	public void Jump()
 	{
 
-		if (isJumping == false) {
+		//if (isJumping == false) {
 			
-			player.transform.Translate (Vector3.up * Time.deltaTime * playerSpeed * 20);
-			isJumping = true;
-		}
+		//	player.transform.Translate (Vector3.up * Time.deltaTime * playerSpeed * 12);
+		//	isJumping = true;
+		//}
 
+		this.GetComponent<Rigidbody> ().velocity = Vector2.zero;
+		this.GetComponent<Rigidbody> ().AddForce (jumping);
 
-	}
-
-	void Gravity()
-	{
-		if (isJumping == true) {
-			player.transform.Translate (Vector3.down * Time.deltaTime * playerSpeed);
-			
-		}
 	}
 
 	public void MoveLeft()
@@ -66,11 +59,16 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
+	public void MoveRightAndroid()
+	{
+		player.transform.Translate (Vector3.right * Time.deltaTime * playerSpeed);
+
+	}
+
 	private void Movement()
 	{
 		MoveRight ();
 		MoveLeft ();
-		//Jump ();
 	}
 
 	void CheckGroundCollision()
