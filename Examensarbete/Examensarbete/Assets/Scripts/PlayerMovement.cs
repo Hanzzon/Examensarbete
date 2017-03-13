@@ -70,9 +70,9 @@ public class PlayerMovement : MonoBehaviour {
 
 	void CheckGroundCollision()
 	{
-			if (Physics.Raycast(player.transform.position, Vector3.down, 15)) {
-				isJumping = false;
-			}
+		if (Physics.Raycast(player.transform.position, Vector3.down, 15)) {
+			isJumping = false;
+		}
 	}
 
 }
