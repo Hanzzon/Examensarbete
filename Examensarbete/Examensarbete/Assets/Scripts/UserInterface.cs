@@ -13,7 +13,10 @@ public class UserInterface : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(PlayerHandling.completedMissions > 0)
+		{
+			Destroy (Info);
+		}
 	}
 
 	public void RemoveInfo()
