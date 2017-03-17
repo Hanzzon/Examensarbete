@@ -24,7 +24,9 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		CheckPlayerDeath ();
+
 		Movement ();
 
 		CheckGroundCollision ();
@@ -72,6 +74,13 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if (Physics.Raycast(player.transform.position, Vector3.down, 15)) {
 			isJumping = false;
+		}
+	}
+
+	void CheckPlayerDeath()
+	{
+		if (player.transform.position.y < -300) {
+			player.transform.position = new Vector3 (-100, 30, 100);
 		}
 	}
 

@@ -81,6 +81,7 @@
 'Assets/Scripts/BuildBridgeScript.cs'
 'Assets/Scripts/CollectPoints.cs'
 'Assets/Scripts/EnterBuildBridge.cs'
+'Assets/Scripts/PlayerHandling.cs'
 'Assets/Scripts/PlayerMovement.cs'
 -r:'/Applications/Unity/Unity.app/Contents/MonoBleedingEdge/lib/mono/unity/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/MonoBleedingEdge/lib/mono/unity/System.Xml.Linq.dll'
