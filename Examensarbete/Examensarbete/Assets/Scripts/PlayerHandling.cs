@@ -6,6 +6,7 @@ public class PlayerHandling : MonoBehaviour {
 
 	public GameObject player;
 	public static int completedMissions = 0;
+	public static bool missionIsFinished = false;
 
 	// Use this for initialization
 	void Start () {
@@ -19,17 +20,17 @@ public class PlayerHandling : MonoBehaviour {
 
 	void CheckCompletedMissions()
 	{
-		if (CollectPoints.missionIsFinished == true) {
+		if (missionIsFinished == true) {
 			print ("MISSION IS FINISHED!");
 			if (completedMissions == 1) {
 				player.transform.position = new Vector3 (400, 30, 100);
-				CollectPoints.missionIsFinished = false;
+				missionIsFinished = false;
 				print("PLAYER IS TRANSFORMED TO FIRST POINT!");
 			}
 			else if(completedMissions == 2)
 			{
 				player.transform.position = new Vector3 (1250, 30, 100);
-				CollectPoints.missionIsFinished = false;
+				missionIsFinished = false;
 				print ("PLAYER IS TRANSFORMED TO SECOND POINT");
 			}
 		}

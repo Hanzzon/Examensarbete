@@ -11,8 +11,6 @@ public class CollectPoints : MonoBehaviour {
 	private string itemsToCollect;
 	public Text itemsCollectedText;
 	public Text itemsToCollectText;
-
-	public static bool missionIsFinished;
 	// Use this for initialization
 	void Start () {
 		collectedItems = 0;
@@ -20,7 +18,7 @@ public class CollectPoints : MonoBehaviour {
 		result = 24;
 		itemsToCollectText.text = "Hämta " + itemsToCollect + " föremål!";
 
-		missionIsFinished = false;
+		PlayerHandling.missionIsFinished = false;
 	}
 	
 	// Update is called once per frame
@@ -38,7 +36,7 @@ public class CollectPoints : MonoBehaviour {
 		if (_collision.gameObject.name == "ExitPortal") {
 			if (collectedItems == result) {
 				PlayerHandling.completedMissions++;
-				missionIsFinished = true;
+				PlayerHandling.missionIsFinished = true;
 				SceneManager.LoadScene ("Map");
 			} 
 			else {
