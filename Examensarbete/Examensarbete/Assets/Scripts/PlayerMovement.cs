@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float playerSpeed;
 
 	private bool isJumping;
+	private bool isMoving;
 
 	private Vector2 jumping = new Vector2(0, 4000);
 
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour {
 		playerSpeed = 100.0f;
 
 		isJumping = false;
+		isMoving = false;
 	}
 	
 	// Update is called once per frame
@@ -60,8 +62,31 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void MoveRightAndroid()
 	{
-		player.transform.Translate (Vector3.right * Time.deltaTime * playerSpeed);
+		if (isMoving) {
+			player.transform.Translate (Vector3.right * Time.deltaTime * playerSpeed);
+			print ("Transforming right");
+		}
 
+	}
+
+	public void MoveLeftAndroid()
+	{
+		if (isMoving) {
+			player.transform.Translate (Vector3.left * Time.deltaTime * playerSpeed);
+			print ("Transforming left");
+		}
+	}
+
+	public void SetMovement()
+	{
+		isMoving = true;
+		print ("Is moving right");
+	}
+
+	public void SetNoMovement()
+	{
+		isMoving = false;
+		print("Is not moving");
 	}
 
 	private void Movement()
