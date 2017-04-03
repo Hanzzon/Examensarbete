@@ -35,6 +35,7 @@ public class Movement : MonoBehaviour {
 			anim.SetBool ("Jump", false);
 
 		Move (hInput);
+		CheckPlayerDeath ();
 	}
 
 	public void Move(float horizontalInput)
@@ -60,5 +61,12 @@ public class Movement : MonoBehaviour {
 	{
 		if (isGrounded)
 			rb.velocity += jumpForce * Vector2.up;
+	}
+
+	void CheckPlayerDeath()
+	{
+		if (rb.transform.position.y < -300) {
+			rb.transform.position = new Vector3 (-100, 30, 100);
+		}
 	}
 }
