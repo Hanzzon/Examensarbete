@@ -35,7 +35,6 @@ public class Movement : MonoBehaviour {
 			anim.SetBool ("Jump", false);
 
 		Move (hInput);
-		CheckPlayerDeath ();
 	}
 
 	public void Move(float horizontalInput)
