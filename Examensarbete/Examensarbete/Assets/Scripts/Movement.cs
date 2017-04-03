@@ -67,6 +67,7 @@ public class Movement : MonoBehaviour {
 	{
 		if (rb.transform.position.y < -300) {
 			rb.transform.position = new Vector3 (-100, 30, 100);
+			print ("Dead");
 		}
 	}
 }
