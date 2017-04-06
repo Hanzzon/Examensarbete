@@ -33,6 +33,18 @@ public class PlayerHandling : MonoBehaviour {
 				missionIsFinished = false;
 				print ("PLAYER IS TRANSFORMED TO SECOND POINT");
 			}
+			else if(completedMissions == 3)
+			{
+				player.transform.position = new Vector3 (2000, 30, 100);
+				missionIsFinished = false;
+				print ("PLAYER IS TRANSFORMED TO THIRD POINT");
+			}
+			else if(completedMissions == 4)
+			{
+				player.transform.position = new Vector3 (2900, 30, 100);
+				missionIsFinished = false;
+				print ("PLAYER IS TRANSFORMED TO FOURTH POINT");
+			}
 		}
 	}
 }
