@@ -15,6 +15,15 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		transform.position = player.transform.position + offset;
-	}
+        //transform.position = player.transform.position + offset;
+
+        // Camera follows the player with specified offset position
+        if (player.transform.position.y > 100)
+        {
+            float calc = player.transform.position.y - 87;
+            transform.position = new Vector3(player.transform.position.x + offset.x, 75 + calc, offset.z);
+        }
+        else
+            transform.position = new Vector3(player.transform.position.x + offset.x, 87, offset.z); 
+    }
 }

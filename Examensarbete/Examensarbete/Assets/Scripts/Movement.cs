@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class Movement : MonoBehaviour {
 	private Animator anim;
 
 	private float speed = 100f;
-	private float jumpForce = 100f;
+	private float jumpForce = 200f;
 
 	private float hInput = 0;
 	private float groundRadius = 0.2f;
@@ -27,6 +28,8 @@ public class Movement : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+        //CheckPlayerDeath();
+
 		isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, playerMask);
 
 		if (!isGrounded)
@@ -46,9 +49,9 @@ public class Movement : MonoBehaviour {
 		anim.SetFloat ("Speed", Mathf.Abs (horizontalInput));
 
 		if(horizontalInput < 0)
-			transform.localScale = new Vector3 (-100, 100, 1);
+			transform.localScale = new Vector3 (-60, 60, 1);
 		else if(horizontalInput > 0)
-			transform.localScale = new Vector3 (100, 100, 1);
+			transform.localScale = new Vector3 (60, 60, 1);
 	}
 
 	public void StartMoving(float horizontalInput)
@@ -64,9 +67,31 @@ public class Movement : MonoBehaviour {
 
 	void CheckPlayerDeath()
 	{
-		if (rb.transform.position.y < -300) {
-			rb.transform.position = new Vector3 (-100, 30, 100);
+		if (rb.transform.position.y < -50) {
+			rb.transform.position = new Vector3 (-58, 26, 0);
 			print ("Dead");
 		}
 	}
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Water")
+        {
+            print("WATER!");
+            rb.transform.position = new Vector3(-58, 26, 0);
+        }
+
+        if (coll.gameObject.name == "MissionPortal")
+        {
+            //if (levelIndex == 1)
+            //{
+                SceneManager.LoadScene("BuildBridge");
+                //print(levelIndex);
+            //}
+            //else if (levelIndex == 2)
+            //{
+                //SceneManager.LoadScene("MissionDefeatEnemy");
+            //}
+        }
+    }
 }

@@ -16,7 +16,7 @@ public class EnterMission : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter2D(Collision2D _collision)
+	void OnTriggerEnter2D(Collider2D _collision)
 	{
 		levelIndex = Random.Range (1, 3);
 		if (_collision.gameObject.name == "MissionPortal") {
