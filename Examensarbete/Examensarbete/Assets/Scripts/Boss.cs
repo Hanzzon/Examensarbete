@@ -21,8 +21,8 @@ public class Boss : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (transform.position.y < 19.06499f)
-            transform.position = new Vector3(transform.position.x, 19.06499f, 0f); 
+        //if (transform.position.y < 19.06499f)
+            //transform.position = new Vector3(transform.position.x, 19.06499f, 0f); 
 
         if (turn)
             Move(1);
@@ -43,8 +43,8 @@ public class Boss : MonoBehaviour
         rb.velocity = moveVel;
 
         if (horizontalInput < 0)
-            transform.localScale = new Vector3(-30, 30, 0);
+            transform.localScale = new Vector3(-25, 25, 0);
         else if (horizontalInput > 0)
-            transform.localScale = new Vector3(30, 30, 0);
+            transform.localScale = new Vector3(25, 25, 0);
     }
 }
