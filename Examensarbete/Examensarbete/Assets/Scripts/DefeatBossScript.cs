@@ -14,7 +14,7 @@ public class DefeatBossScript : MonoBehaviour {
 	private int nrOfJumps;
 	private int totalJumpsToComplete;
 
-	private bool win;
+	private bool win = false;
 
 	// Use this for initialization
 	void Start () {

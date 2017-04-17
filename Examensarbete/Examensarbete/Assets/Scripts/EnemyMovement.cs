@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour {
 
 	public GameObject Boss;
-	private bool startMovement = true;
+	//private bool startMovement = true;
 	private bool moveRight;
 
 	// Use this for initialization

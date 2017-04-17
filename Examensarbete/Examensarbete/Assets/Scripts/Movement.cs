@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Movement : MonoBehaviour {
+public class Movement : MonoBehaviour
+{
+    public static Movement instance = null;
 
 	public LayerMask playerMask;
 	public Transform groundCheck;
@@ -22,14 +24,22 @@ public class Movement : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		rb = GetComponent<Rigidbody2D> ();
-		anim = GetComponent<Animator> ();
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            GameObject.DontDestroyOnLoad(gameObject);
+            rb = GetComponent<Rigidbody2D>();
+            anim = GetComponent<Animator>();
+        }
+        
 	}
 
 	void FixedUpdate()
 	{
-        //CheckPlayerDeath();
-
 		isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, playerMask);
 
 		if (!isGrounded)
@@ -38,6 +48,23 @@ public class Movement : MonoBehaviour {
 			anim.SetBool ("Jump", false);
 
 		Move (hInput);
+
+        if (Input.GetButtonDown("Fire3"))
+        {
+            if (isGrounded)
+                rb.velocity += jumpForce * Vector2.up;
+        }
+
+        float XOne = Input.GetAxis("Horizontal");
+        
+        if(XOne > 0)
+        {
+            Move(1f);
+        }
+        else if(XOne < 0)
+        {
+            Move(-1f);
+        }
 	}
 
 	public void Move(float horizontalInput)
@@ -65,33 +92,46 @@ public class Movement : MonoBehaviour {
 			rb.velocity += jumpForce * Vector2.up;
 	}
 
-	void CheckPlayerDeath()
-	{
-		if (rb.transform.position.y < -50) {
-			rb.transform.position = new Vector3 (-58, 26, 0);
-			print ("Dead");
-		}
-	}
-
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.tag == "Water")
         {
             print("WATER!");
-            rb.transform.position = new Vector3(-58, 26, 0);
+            GameObject obj = GameObject.Find("MapManager");
+            MapManager script = obj.GetComponent<MapManager>();
+
+            rb.transform.position = script.SpawnPosition();
         }
 
-        if (coll.gameObject.name == "MissionPortal")
+        if (coll.gameObject.tag == "Bridge")
         {
-            //if (levelIndex == 1)
-            //{
-                SceneManager.LoadScene("BuildBridge");
-                //print(levelIndex);
-            //}
-            //else if (levelIndex == 2)
-            //{
-                //SceneManager.LoadScene("MissionDefeatEnemy");
-            //}
+            SceneManager.LoadScene("BridgeBuilding");
+        }
+        else if (coll.gameObject.tag == "Boss")
+        {
+            SceneManager.LoadScene("BossBattle");
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Crate")
+        {           
+            Destroy(col.gameObject);
+
+            GameObject obj = GameObject.Find("BridgeManager");
+            BridgeManager script = obj.GetComponent<BridgeManager>();
+            script.AddPlayerScore();
+            Destroy(col.gameObject);
+        }
+
+        if(col.gameObject.tag == "Boss")
+        {
+            GameObject obj = GameObject.Find("BossManager");
+            BossManager script = obj.GetComponent<BossManager>();
+            script.AddPlayerScore();
+
+            rb.velocity += jumpForce * Vector2.up;
         }
     }
 }
