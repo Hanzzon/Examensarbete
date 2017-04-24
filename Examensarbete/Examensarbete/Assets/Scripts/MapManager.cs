@@ -49,11 +49,11 @@ public class MapManager : MonoBehaviour
             instance = this;
             GameObject.DontDestroyOnLoad(gameObject);
 
-            portalPosition = new Vector3[4];
-            signPosition = new Vector3[4];
+            portalPosition = new Vector3[10];
+            signPosition = new Vector3[10];
             //questionArray = new QuestionList[3];
-            signs = new GameObject[4];
-            portals = new GameObject[4];
+            signs = new GameObject[10];
+            portals = new GameObject[10];
 
             //playerPos = 1;
             //PlayerPosition(playerPos);
@@ -66,9 +66,17 @@ public class MapManager : MonoBehaviour
     void SignSpawn()
     {
         signPosition[0] = new Vector3(409f, 98f, 0f);
-        signPosition[1] = new Vector3(1325f, 128f, 0f);
-        signPosition[2] = new Vector3(2000f, 127f, 0f);
-        signPosition[3] = new Vector3(2815f, 118f, 0f);
+        signPosition[1] = new Vector3(830f, 20f, 0f);
+        signPosition[2] = new Vector3(1325f, 128f, 0f);
+        signPosition[3] = new Vector3(2000f, 127f, 0f);
+        signPosition[4] = new Vector3(2815f, 118f, 0f);
+
+        signPosition[5] = new Vector3(3300f, 125f, 0f);
+        signPosition[6] = new Vector3(3870f, 100f, 0f);
+        signPosition[7] = new Vector3(4120f, 127f, 0f);
+        signPosition[8] = new Vector3(4540f, 55f, 0f);
+        signPosition[9] = new Vector3(4960f, 55f, 0f);
+        
 
         GameObject getPrefab = (GameObject)Resources.Load("Sign", typeof(GameObject));
 
@@ -93,9 +101,15 @@ public class MapManager : MonoBehaviour
     void PortalSpawn()
     {
         portalPosition[0] = new Vector3(405f, 160f, 0f);
-        portalPosition[1] = new Vector3(1320f, 193f, 0f);
-        portalPosition[2] = new Vector3(2000f, 188f, 0f);
-        portalPosition[3] = new Vector3(2815f, 178f, 0f);
+        portalPosition[1] = new Vector3(830f, 70f, 0f);
+        portalPosition[2] = new Vector3(1320f, 180f, 0f);
+        portalPosition[3] = new Vector3(2000f, 188f, 0f);
+        portalPosition[4] = new Vector3(2815f, 178f, 0f);
+        portalPosition[5] = new Vector3(3300f, 170f, 0f);
+        portalPosition[6] = new Vector3(3870f, 150f, 0f);
+        portalPosition[7] = new Vector3(4120f, 180f, 0f);
+        portalPosition[8] = new Vector3(4500f, 100f, 0f);
+        portalPosition[9] = new Vector3(4950f, 100f, 0f);
 
         GameObject getPrefab = (GameObject)Resources.Load("MissionPortal", typeof(GameObject));
 
@@ -111,6 +125,32 @@ public class MapManager : MonoBehaviour
                 case 1:
                     portals[i].gameObject.tag = "Boss";
                     break;
+
+                case 2:
+                    portals[i].gameObject.tag = "Bridge";
+                    break;
+                case 3:
+                    portals[i].gameObject.tag = "Boss";
+                    break;
+                case 4:
+                    portals[i].gameObject.tag = "Bridge";
+                    break;
+                case 5:
+                    portals[i].gameObject.tag = "Boss";
+                    break;
+                case 6:
+                    portals[i].gameObject.tag = "Bridge";
+                    break;
+                case 7:
+                    portals[i].gameObject.tag = "Boss";
+                    break;
+                case 8:
+                    portals[i].gameObject.tag = "Bridge";
+                    break;
+                case 9:
+                    portals[i].gameObject.tag = "Boss";
+                    break;
+
                 default:
                     break;
 
