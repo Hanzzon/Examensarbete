@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class BridgeManager : MonoBehaviour {
 
@@ -34,8 +35,13 @@ public class BridgeManager : MonoBehaviour {
 
     void ShowInfo()
     {
-        string questionDB = MapManager.questionArray[0].question;
-        print(questionDB);
+        //string questionDB = MapManager.questionArray[0].question;
+
+		string questionDB = MapManager.PickRandomQuestion();
+		print("QUESTION: " + questionDB + "Amount: " + MapManager.questionArray.Count);
+		MapManager.RemoveQuestion (questionDB);
+		print ("question removed" + MapManager.questionArray.Count);
+
         sum = int.Parse(MapManager.questionArray[0].answer);
         print(sum);
         string[] splitQuestion = questionDB.Split(new char[0]);

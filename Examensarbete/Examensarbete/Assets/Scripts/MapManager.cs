@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
     public static int correctAnswer;
     public static string question;
 
-    public static QuestionList[] questionArray;
+	public static List<QuestionList> questionArray = new List<QuestionList> ();
 
     public GameObject player;
     public GameObject[] portals;
@@ -51,7 +51,7 @@ public class MapManager : MonoBehaviour
 
             portalPosition = new Vector3[4];
             signPosition = new Vector3[4];
-            questionArray = new QuestionList[3];
+            //questionArray = new QuestionList[3];
             signs = new GameObject[4];
             portals = new GameObject[4];
 
@@ -171,9 +171,31 @@ public class MapManager : MonoBehaviour
             string questionDB = GetDataValue(getArray[i], "Question:");
             string answerDB = GetDataValue(getArray[i], "Answer:");
 
-            questionArray[i] = new QuestionList(idDB, questionDB, answerDB, 0);
+			questionArray.Add(new QuestionList(idDB, questionDB, answerDB, 0));
         }
     }
+
+	public static string PickRandomQuestion()
+	{
+		int questionIndex = Random.Range (0, 4);
+		print ("QUESTIONINDEX: " + questionIndex);
+
+		for (int i = 0; i < questionArray.Count; i++) 
+		{
+			return questionArray [questionIndex].question;
+		}
+
+		return null;
+	}
+
+	public static void RemoveQuestion(string _input)
+	{
+		for (int i = 0; i < questionArray.Count; i++) {
+			if (questionArray[i].question == _input) {
+				questionArray.RemoveAt (i);
+			}
+		}
+	}
 
     IEnumerator SendToDB()
     {
