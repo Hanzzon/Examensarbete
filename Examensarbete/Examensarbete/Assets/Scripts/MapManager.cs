@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
     public static int correctAnswer;
     public static string question;
 
-	public static List<QuestionList> questionArray = new List<QuestionList> ();
+	public static List<QuestionList> questions = new List<QuestionList> ();
 
     public GameObject player;
     public GameObject[] portals;
@@ -171,18 +171,18 @@ public class MapManager : MonoBehaviour
             string questionDB = GetDataValue(getArray[i], "Question:");
             string answerDB = GetDataValue(getArray[i], "Answer:");
 
-			questionArray.Add(new QuestionList(idDB, questionDB, answerDB, 0));
+			questions.Add(new QuestionList(idDB, questionDB, answerDB, 0));
         }
     }
 
 	public static string PickRandomQuestion()
 	{
-		int questionIndex = Random.Range (0, 4);
+		int questionIndex = Random.Range (0, questions.Count);
 		print ("QUESTIONINDEX: " + questionIndex);
 
-		for (int i = 0; i < questionArray.Count; i++) 
+		for (int i = 0; i < questions.Count; i++) 
 		{
-			return questionArray [questionIndex].question;
+			return questions [questionIndex].question;
 		}
 
 		return null;
@@ -190,9 +190,9 @@ public class MapManager : MonoBehaviour
 
 	public static void RemoveQuestion(string _input)
 	{
-		for (int i = 0; i < questionArray.Count; i++) {
-			if (questionArray[i].question == _input) {
-				questionArray.RemoveAt (i);
+		for (int i = 0; i < questions.Count; i++) {
+			if (questions[i].question == _input) {
+				questions.RemoveAt (i);
 			}
 		}
 	}
@@ -205,7 +205,7 @@ public class MapManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("useridPost", userID);
         form.AddField("timerPost", timer);
-        form.AddField("attemptPost", questionArray[0].attempt);
+        form.AddField("attemptPost", questions[0].attempt);
         form.AddField("answerPost", answer);
         form.AddField("correctanswerPost", correctAnswer);
         form.AddField("questionPost", question);

@@ -31,9 +31,11 @@ public class BossManager : MonoBehaviour
 
     void ShowInfo()
     {
-        string questionDB = MapManager.questionArray[1].question;
+		string questionDB = MapManager.PickRandomQuestion ();
         print(questionDB);
-        sum = int.Parse(MapManager.questionArray[1].answer);
+		MapManager.RemoveQuestion (questionDB);
+
+        sum = int.Parse(MapManager.questions[1].answer);
         print(sum);
         string[] splitQuestion = questionDB.Split(new char[0]);
         print(splitQuestion[0]);
@@ -52,7 +54,7 @@ public class BossManager : MonoBehaviour
 
     public void TryAgain()
     {
-        MapManager.questionArray[1].attempt++;
+        MapManager.questions[1].attempt++;
 
         MapManager mapManagerDB = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapManagerDB.SelectForDB(score, sum, question);
@@ -64,7 +66,7 @@ public class BossManager : MonoBehaviour
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(1325f, 128f, 0f);
-        MapManager.questionArray[1].attempt++;
+        MapManager.questions[1].attempt++;
 
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapManager.ChangeSign(1, "Loser");
@@ -78,7 +80,7 @@ public class BossManager : MonoBehaviour
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(1325f, 128f, 0f);
-        MapManager.questionArray[1].attempt++;
+        MapManager.questions[1].attempt++;
 
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapManager.DestroyPortal(1);

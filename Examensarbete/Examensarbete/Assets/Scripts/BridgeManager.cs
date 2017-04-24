@@ -38,11 +38,11 @@ public class BridgeManager : MonoBehaviour {
         //string questionDB = MapManager.questionArray[0].question;
 
 		string questionDB = MapManager.PickRandomQuestion();
-		print("QUESTION: " + questionDB + "Amount: " + MapManager.questionArray.Count);
+		print("QUESTION: " + questionDB + " Amount: " + MapManager.questions.Count);
 		MapManager.RemoveQuestion (questionDB);
-		print ("question removed" + MapManager.questionArray.Count);
+		print ("Removed question. Current amount of questions: " + MapManager.questions.Count);
 
-        sum = int.Parse(MapManager.questionArray[0].answer);
+        sum = int.Parse(MapManager.questions[0].answer);
         print(sum);
         string[] splitQuestion = questionDB.Split(new char[0]);
         print(splitQuestion[0]);
@@ -71,7 +71,7 @@ public class BridgeManager : MonoBehaviour {
 
     public void TryAgain()
     {
-        MapManager.questionArray[0].attempt++;
+        MapManager.questions[0].attempt++;
 
         MapManager mapManagerDB = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapManagerDB.SelectForDB(score, sum, question);
@@ -83,7 +83,7 @@ public class BridgeManager : MonoBehaviour {
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(409f, 98f, 0f);
-        MapManager.questionArray[0].attempt++;
+        MapManager.questions[0].attempt++;
 
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         //mapManager.PlayerPosition(2);
@@ -98,7 +98,7 @@ public class BridgeManager : MonoBehaviour {
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(409f, 98f, 0f);
-        MapManager.questionArray[0].attempt++;
+        MapManager.questions[0].attempt++;
 
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         //mapManager.PlayerPosition(2);
