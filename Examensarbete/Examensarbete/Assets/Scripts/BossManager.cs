@@ -67,6 +67,7 @@ public class BossManager : MonoBehaviour
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(1325f, 128f, 0f);
         MapManager.questions[1].attempt++;
+        MapManager.missionsPlayed--;
 
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapManager.ChangeSign(1, "Loser");

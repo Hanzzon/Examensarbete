@@ -85,6 +85,8 @@ public class BridgeManager : MonoBehaviour {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(409f, 98f, 0f);
         MapManager.questions[0].attempt++;
+        MapManager.missionsPlayed--;
+
 
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         //mapManager.PlayerPosition(2);
