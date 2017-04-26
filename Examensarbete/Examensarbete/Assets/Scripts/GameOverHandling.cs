@@ -20,7 +20,7 @@ public class GameOverHandling : MonoBehaviour {
 
     void SetEndText()
     {
-        gameOverText.text = "Bra jobbat! Du utforskade " + MapManager.missionsPlayed + " av totalt 10 uppgifter. Tack för din medverkan!";
+        gameOverText.text = "Du utforskade " + MapManager.missionsPlayed + " av totalt 10 uppgifter. Bra jobbat!";
     }
 
     public void PlayAgain()
@@ -33,14 +33,15 @@ public class GameOverHandling : MonoBehaviour {
     public void Exit()
     {
 
-        ResetPlayerStatus();
-        SceneManager.LoadScene("MainMenu");
+        //ResetPlayerStatus();
+        //SceneManager.LoadScene("MainMenu");
+
+        Application.Quit();
     }
 
     private void ResetPlayerStatus()
     {
         MapManager.missionsPlayed = 0;
         MapManager.instance = null;
-
     }
 }
