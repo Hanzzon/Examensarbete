@@ -20,7 +20,7 @@ public class GameOverHandling : MonoBehaviour {
 
     void SetEndText()
     {
-        gameOverText.text = "Bra jobbat! Du utforskade " + MapManager.missionsPlayed + "av totalt 10 uppgifter. Tack för din medverkan!";
+        gameOverText.text = "Bra jobbat! Du utforskade " + MapManager.missionsPlayed + " av totalt 10 uppgifter. Tack för din medverkan!";
     }
 
     public void PlayAgain()
