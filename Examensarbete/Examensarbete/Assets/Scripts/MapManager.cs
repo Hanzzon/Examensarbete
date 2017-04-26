@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    static MapManager instance = null;
+    public static MapManager instance = null;
 
     public static int userID;
     public static string gender;

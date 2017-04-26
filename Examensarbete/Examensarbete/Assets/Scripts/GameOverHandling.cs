@@ -25,11 +25,22 @@ public class GameOverHandling : MonoBehaviour {
 
     public void PlayAgain()
     {
+
+        ResetPlayerStatus();
         SceneManager.LoadScene("Map");
     }
 
     public void Exit()
     {
+
+        ResetPlayerStatus();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void ResetPlayerStatus()
+    {
+        MapManager.missionsPlayed = 0;
+        MapManager.instance = null;
+
     }
 }

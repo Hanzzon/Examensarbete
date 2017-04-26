@@ -31,11 +31,11 @@ public class BossManager : MonoBehaviour
 
     void ShowInfo()
     {
-		string questionDB = MapManager.PickRandomQuestion ();
-        print(questionDB);
-		MapManager.RemoveQuestion (questionDB);
+        string questionDB = MapManager.PickRandomQuestion();
 
-        sum = int.Parse(MapManager.questions[1].answer);
+        print("Removed question. Current amount of questions: " + MapManager.questions.Count);
+
+        sum = int.Parse(MapManager.PickRandomAnswer());
         print(sum);
         string[] splitQuestion = questionDB.Split(new char[0]);
         print(splitQuestion[0]);
