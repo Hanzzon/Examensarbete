@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
-    public static Movement instance = null;
+    //public static Movement instance = null;
 
 	public LayerMask playerMask;
 	public Transform groundCheck;
@@ -24,17 +24,17 @@ public class Movement : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            GameObject.DontDestroyOnLoad(gameObject);
+        //if (instance != null)
+        //{
+        //    Destroy(gameObject);
+        //}
+        //else
+        //{
+        //    instance = this;
+        //    GameObject.DontDestroyOnLoad(gameObject);
             rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
-        }
+        //}
         
 	}
 
@@ -97,18 +97,24 @@ public class Movement : MonoBehaviour
         if (coll.gameObject.tag == "Water")
         {
             print("WATER!");
-            GameObject obj = GameObject.Find("MapManager");
-            MapManager script = obj.GetComponent<MapManager>();
+            //GameObject obj = GameObject.Find("MapManager");
+            //MapManager script = obj.GetComponent<MapManager>();
 
-            rb.transform.position = script.SpawnPosition();
+            //rb.transform.position = script.SpawnPosition();
+
+            rb.transform.position = MapManager.signPosition[MapManager.missionsPlayed - 1];
         }
 
         if (coll.gameObject.tag == "Bridge")
         {
+            MapManager.missionsPlayed++;
+            print("Mission played: " + MapManager.missionsPlayed);
             SceneManager.LoadScene("BridgeBuilding");
         }
         else if (coll.gameObject.tag == "Boss")
         {
+            MapManager.missionsPlayed++;
+            print("Mission played: " + MapManager.missionsPlayed);
             SceneManager.LoadScene("BossBattle");
         }
     }

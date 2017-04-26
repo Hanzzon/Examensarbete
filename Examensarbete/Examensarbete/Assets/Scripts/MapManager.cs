@@ -15,6 +15,8 @@ public class MapManager : MonoBehaviour
     public static int correctAnswer;
     public static string question;
 
+    public static int roundsPlayed;
+
 	public static List<QuestionList> questions = new List<QuestionList> ();
 
     public GameObject player;
@@ -22,9 +24,12 @@ public class MapManager : MonoBehaviour
     public GameObject[] signs;
 
     public Vector3[] portalPosition;
-    public Vector3[] signPosition;
+    public static Vector3[] signPosition;
 
     private string[] getArray;
+
+    public static int missionsPlayed = 0;
+    public static int questionIndex;
 
     void Awake()
     {
@@ -57,9 +62,16 @@ public class MapManager : MonoBehaviour
 
             //playerPos = 1;
             //PlayerPosition(playerPos);
+            
+
             PortalSpawn();
             SignSpawn();
+
+            StartCoroutine(GetFromDB());
+            StartCoroutine(SendRoundToDB());
             StartCoroutine(GetQuestions());
+
+            PlayerPosition();
         }
 	}
 
@@ -82,7 +94,7 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < signPosition.Length; i++)
         {
-            print(signPosition[i]);
+            //print(signPosition[i]);
             signs[i] = Instantiate(getPrefab, signPosition[i], Quaternion.identity);
         }
     }
@@ -163,14 +175,27 @@ public class MapManager : MonoBehaviour
 
     }
 
-    public void PlayerPosition(int value)
+    public void PlayerPosition()
     {
-        playerPos = value;
-        print(playerPos);
-        if (playerPos == 1)
-            player.transform.position = new Vector3(-53f, 21f, 0f);
-        else if (playerPos == 2)
-            player.transform.position = new Vector3(410f, 100f, 0f);
+        //playerPos = value;
+        //print(playerPos);
+        //if (playerPos == 1)
+        //    player.transform.position = new Vector3(-53f, 21f, 0f);
+        //else if (playerPos == 2)
+        //    player.transform.position = new Vector3(410f, 100f, 0f);
+
+        //print("Player transformed           " + "played missions = " + missionsPlayed);
+
+        for (int i = 0; i < signPosition.Length; i++)
+        {
+            if (missionsPlayed == i)
+            {
+                //player.transform.position = signPosition[i + 1];
+                player.transform.position = new Vector3(2815f, 178f, 0f);
+
+                //print("Played transformed to: " + signPosition[i + 1].ToString());
+            }
+        }
     }
 
     public Vector3 SpawnPosition()
@@ -183,8 +208,9 @@ public class MapManager : MonoBehaviour
         answer = inAnswer;
         correctAnswer = inCorrectAnswer;
         question = inQuestion;
-
+        
         StartCoroutine(SendToDB());
+
     }
 
     void Update()
@@ -217,18 +243,32 @@ public class MapManager : MonoBehaviour
 
 	public static string PickRandomQuestion()
 	{
-		int questionIndex = Random.Range (0, questions.Count);
-		print ("QUESTIONINDEX: " + questionIndex);
 
-		for (int i = 0; i < questions.Count; i++) 
+        questionIndex = Random.Range(0, questions.Count);
+        //print ("QUESTIONINDEX: " + questionIndex);
+
+        for (int i = 0; i < questions.Count; i++) 
 		{
-			return questions [questionIndex].question;
-		}
+            print("QUESTION: " + questions[questionIndex].question);
+            return questions [questionIndex].question;
+            
+        }
 
 		return null;
 	}
 
-	public static void RemoveQuestion(string _input)
+    public static string PickRandomAnswer()
+    {
+        for (int i = 0; i < questions.Count; i++)
+        {
+            print("Answer: " + questions[questionIndex].answer);
+            return questions[questionIndex].answer;
+            
+        }
+        return null;
+    }
+
+    public static void RemoveQuestion(string _input)
 	{
 		for (int i = 0; i < questions.Count; i++) {
 			if (questions[i].question == _input) {
@@ -247,12 +287,42 @@ public class MapManager : MonoBehaviour
         form.AddField("timerPost", timer);
         form.AddField("attemptPost", questions[0].attempt);
         form.AddField("answerPost", answer);
+        form.AddField("playedPost", roundsPlayed);
         form.AddField("correctanswerPost", correctAnswer);
         form.AddField("questionPost", question);
 
         WWW www = new WWW(attemptURL, form);
 
         yield return www;
+    }
+
+    IEnumerator SendRoundToDB()
+    {
+        int timer = (int)playTimer;
+        string attemptURL = "http://examen.sytes.net/scripts/setPlayed.php";
+
+        WWWForm form = new WWWForm();
+        form.AddField("useridPost", userID);
+        form.AddField("playedPost", roundsPlayed);
+
+        WWW www = new WWW(attemptURL, form);
+
+        yield return www;
+    }
+
+    IEnumerator GetFromDB()
+    {
+        int timer = (int)playTimer;
+        string attemptURL = "http://examen.sytes.net/scripts/getPlayed.php";
+
+        WWWForm form = new WWWForm();
+        form.AddField("useridPost", userID);
+
+        WWW www = new WWW(attemptURL, form);
+
+        yield return www;
+
+        roundsPlayed = int.Parse(www.text) + 1;
     }
 
     string GetDataValue(string data, string index)

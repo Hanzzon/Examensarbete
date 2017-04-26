@@ -37,12 +37,13 @@ public class BridgeManager : MonoBehaviour {
     {
         //string questionDB = MapManager.questionArray[0].question;
 
-		string questionDB = MapManager.PickRandomQuestion();
-		print("QUESTION: " + questionDB + " Amount: " + MapManager.questions.Count);
-		MapManager.RemoveQuestion (questionDB);
+        string questionDB = MapManager.PickRandomQuestion();
+        //string questionDB = MapManager.questions[1].question;
+		//print("QUESTION: " + questionDB + " Amount: " + MapManager.questions.Count);
+		
 		print ("Removed question. Current amount of questions: " + MapManager.questions.Count);
 
-        sum = int.Parse(MapManager.questions[0].answer);
+        sum = int.Parse(MapManager.PickRandomAnswer());
         print(sum);
         string[] splitQuestion = questionDB.Split(new char[0]);
         print(splitQuestion[0]);

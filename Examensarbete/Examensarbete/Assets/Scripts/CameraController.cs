@@ -20,6 +20,9 @@ public class CameraController : MonoBehaviour {
         {
             instance = this;
             GameObject.DontDestroyOnLoad(gameObject);
+            //print("PLAYER IS NULL");
+            //player = GameObject.FindGameObjectWithTag("Player");
+            //print(player.ToString());
         }
         //GameObject.DontDestroyOnLoad(gameObject);
         //camera = GetComponent<Transform>();
@@ -48,12 +51,12 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        //if (player == null)
-        //{
-        //    player = GameObject.FindGameObjectWithTag("Player");
-        //}
-        //else
-        //{
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+        else
+        {
             if (player.transform.position.y > 100)
             {
                 float calc = player.transform.position.y - 87;
@@ -61,6 +64,6 @@ public class CameraController : MonoBehaviour {
             }
             else
                 transform.position = new Vector3(player.transform.position.x + offset.x, 87, -215);
-        //}
+        }
     }
 }
