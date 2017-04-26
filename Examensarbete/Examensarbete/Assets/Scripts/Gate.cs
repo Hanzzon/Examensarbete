@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gate : MonoBehaviour {
 
@@ -23,6 +24,8 @@ public class Gate : MonoBehaviour {
         {
             print("Open the gate!");
             anim.enabled = true;
+
+            SceneManager.LoadScene("GameOverScreen");
         }
     }
 }
