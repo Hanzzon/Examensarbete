@@ -103,6 +103,8 @@ public class MapManager : MonoBehaviour
     {
         Sign s = signs[input].GetComponent(typeof(Sign)) as Sign;
         s.SetSign(message);
+
+        print("SIGNINPUT: " + input);
     }
 
     public void DestroyPortal(int input)

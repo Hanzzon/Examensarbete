@@ -90,7 +90,11 @@ public class BridgeManager : MonoBehaviour {
 
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         //mapManager.PlayerPosition(2);
-        mapManager.ChangeSign(0, "Loser");
+
+        for (int i = 0; i < MapManager.signPosition.Length; i++)
+        {
+            mapManager.ChangeSign(MapManager.missionsPlayed, "Loser");
+        }
 
         mapManager.SelectForDB(score, sum, question);
 
@@ -103,10 +107,19 @@ public class BridgeManager : MonoBehaviour {
         gianaMove.transform.position = new Vector3(409f, 98f, 0f);
         MapManager.questions[0].attempt++;
 
+        //MapManager.missionsPlayed++;
+
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         //mapManager.PlayerPosition(2);
-        mapManager.DestroyPortal(0);
-        mapManager.ChangeSign(0, "Winner");
+
+        for (int i = 0; i < MapManager.signPosition.Length; i++)
+        {
+            mapManager.DestroyPortal(MapManager.missionsPlayed - 1);
+            mapManager.ChangeSign(MapManager.missionsPlayed - 1, "Winner");
+        }
+
+        //mapManager.DestroyPortal(0);
+        //mapManager.ChangeSign(0, "Winner");
 
         mapManager.SelectForDB(score, sum, question);
 

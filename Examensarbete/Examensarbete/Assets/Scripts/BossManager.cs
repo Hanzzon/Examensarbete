@@ -59,7 +59,7 @@ public class BossManager : MonoBehaviour
         MapManager mapManagerDB = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapManagerDB.SelectForDB(score, sum, question);
 
-        SceneManager.LoadScene("BridgeBuilding");
+        SceneManager.LoadScene("BossBattle");
     }
 
     public void CancelLevel()
@@ -70,7 +70,14 @@ public class BossManager : MonoBehaviour
         MapManager.missionsPlayed--;
 
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
-        mapManager.ChangeSign(1, "Loser");
+
+        for (int i = 0; i < MapManager.signPosition.Length; i++)
+        {
+            mapManager.ChangeSign(MapManager.missionsPlayed, "Loser");
+        }
+
+        print("Missions played: " + MapManager.missionsPlayed);
+        //mapManager.ChangeSign(1, "Loser");
 
         mapManager.SelectForDB(score, sum, question);
 
@@ -83,9 +90,20 @@ public class BossManager : MonoBehaviour
         gianaMove.transform.position = new Vector3(1325f, 128f, 0f);
         MapManager.questions[1].attempt++;
 
+        //MapManager.missionsPlayed++;
+
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
-        mapManager.DestroyPortal(1);
-        mapManager.ChangeSign(1, "Winner");
+
+        for (int i = 0; i < MapManager.signPosition.Length; i++)
+        {
+            mapManager.DestroyPortal(MapManager.missionsPlayed - 1);
+            mapManager.ChangeSign(MapManager.missionsPlayed - 1, "Winner");
+        }
+
+        //mapManager.DestroyPortal(1);
+        //mapManager.ChangeSign(1, "Winner");
+
+        print("Missions played: " + MapManager.missionsPlayed);
 
         mapManager.SelectForDB(score, sum, question);
 

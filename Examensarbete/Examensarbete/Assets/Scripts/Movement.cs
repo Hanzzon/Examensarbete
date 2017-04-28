@@ -97,12 +97,22 @@ public class Movement : MonoBehaviour
         if (coll.gameObject.tag == "Water")
         {
             print("WATER!");
-            //GameObject obj = GameObject.Find("MapManager");
-            //MapManager script = obj.GetComponent<MapManager>();
+            GameObject obj = GameObject.Find("MapManager");
+            MapManager script = obj.GetComponent<MapManager>();
 
-            //rb.transform.position = script.SpawnPosition();
+            //rb.transform.position = new Vector3(-50, 30, 0);
+                //script.SpawnPosition();
 
-            rb.transform.position = MapManager.signPosition[MapManager.missionsPlayed - 1];
+            if(MapManager.missionsPlayed == 0)
+            {
+                rb.transform.position = new Vector3(-50, 30, 0);
+            }
+            else
+            {
+                rb.transform.position = MapManager.signPosition[MapManager.missionsPlayed - 1];
+            }
+
+            
         }
 
         if (coll.gameObject.tag == "Bridge")
