@@ -16,6 +16,7 @@ public class BridgeManager : MonoBehaviour {
 
     private int objectsToGather;
     private string question;
+	private int questionID;
     
     
     // Use this for initialization
@@ -38,6 +39,8 @@ public class BridgeManager : MonoBehaviour {
         //string questionDB = MapManager.questionArray[0].question;
 
         string questionDB = MapManager.PickRandomQuestion();
+		questionID = MapManager.questions [MapManager.questionIndex].id;
+
         //string questionDB = MapManager.questions[1].question;
 		//print("QUESTION: " + questionDB + " Amount: " + MapManager.questions.Count);
 		
@@ -75,7 +78,7 @@ public class BridgeManager : MonoBehaviour {
         MapManager.questions[0].attempt++;
 
         MapManager mapManagerDB = GameObject.Find("MapManager").GetComponent<MapManager>();
-        mapManagerDB.SelectForDB(score, sum, question);
+		mapManagerDB.SelectForDB(score, sum, question, questionID, 0);
 
         SceneManager.LoadScene("BridgeBuilding");    
     }
@@ -96,7 +99,7 @@ public class BridgeManager : MonoBehaviour {
             mapManager.ChangeSign(MapManager.missionsPlayed, "Loser");
         }
 
-        mapManager.SelectForDB(score, sum, question);
+		mapManager.SelectForDB(score, sum, question, questionID, 0);
 
         SceneManager.LoadScene("Map");
     }
@@ -121,7 +124,7 @@ public class BridgeManager : MonoBehaviour {
         //mapManager.DestroyPortal(0);
         //mapManager.ChangeSign(0, "Winner");
 
-        mapManager.SelectForDB(score, sum, question);
+		mapManager.SelectForDB(score, sum, question, questionID, 1);
 
         //MapManager.questionArray[0] = null;
 

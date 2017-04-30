@@ -14,6 +14,8 @@ public class MapManager : MonoBehaviour
     public static int answer;
     public static int correctAnswer;
     public static string question;
+	private int questionid;
+	private int correct;
 
     public static int roundsPlayed;
 
@@ -205,11 +207,13 @@ public class MapManager : MonoBehaviour
         return player.transform.position;
     }
 
-    public void SelectForDB(int inAnswer, int inCorrectAnswer, string inQuestion)
+	public void SelectForDB(int inAnswer, int inCorrectAnswer, string inQuestion, int inQuestionID, int inCorrect)
     {
         answer = inAnswer;
         correctAnswer = inCorrectAnswer;
         question = inQuestion;
+		questionid = inQuestionID;
+		correct = inCorrect;
         
         StartCoroutine(SendToDB());
 
@@ -292,6 +296,8 @@ public class MapManager : MonoBehaviour
         form.AddField("playedPost", roundsPlayed);
         form.AddField("correctanswerPost", correctAnswer);
         form.AddField("questionPost", question);
+		form.AddField("questionidPost", questionid);
+		form.AddField("correctPost", correct);
 
         WWW www = new WWW(attemptURL, form);
 
@@ -300,7 +306,7 @@ public class MapManager : MonoBehaviour
 
     IEnumerator SendRoundToDB()
     {
-        int timer = (int)playTimer;
+        //int timer = (int)playTimer;
         string attemptURL = "http://examen.sytes.net/scripts/setPlayed.php";
 
         WWWForm form = new WWWForm();
@@ -314,7 +320,7 @@ public class MapManager : MonoBehaviour
 
     IEnumerator GetFromDB()
     {
-        int timer = (int)playTimer;
+        //int timer = (int)playTimer;
         string attemptURL = "http://examen.sytes.net/scripts/getPlayed.php";
 
         WWWForm form = new WWWForm();
