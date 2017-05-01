@@ -13,8 +13,8 @@ public class BossManager : MonoBehaviour
     public Text txtScore;
 
     private int objectsToGather;
-    private string question;
-	private int questionID;
+	public static string question;
+	public static int questionID;
 
     // Use this for initialization
     void Start ()
@@ -90,7 +90,7 @@ public class BossManager : MonoBehaviour
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(1325f, 128f, 0f);
-		MapManager.questions[MapManager.questionIndex].attempt++;
+		//MapManager.questions[MapManager.questionIndex].attempt++;
 
         //MapManager.missionsPlayed++;
 
@@ -108,7 +108,7 @@ public class BossManager : MonoBehaviour
 
         print("Missions played: " + MapManager.missionsPlayed);
 
-		mapManager.SelectForDB(score, sum, question, questionID, 1);
+		//mapManager.SelectForDB(score, sum, question, questionID, 1);
 		MapManager.RemoveQuestion (MapManager.questions[MapManager.questionIndex].question);
 
         SceneManager.LoadScene("Map");

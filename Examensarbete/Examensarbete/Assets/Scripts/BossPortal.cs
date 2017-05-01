@@ -11,6 +11,10 @@ public class BossPortal : MonoBehaviour
             if (BossManager.sum == BossManager.score)
             {
                 print("Winner!");
+				MapManager.questions[MapManager.questionIndex].attempt++;
+				MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
+				mapManager.SelectForDB(BossManager.score, BossManager.sum, BossManager.question, BossManager.questionID, 1);
+				MapManager.RemoveQuestion (MapManager.questions[MapManager.questionIndex].question);
                 GameObject obj = GameObject.Find("DialogBoxWinner");
                 CanvasGroup cg = obj.GetComponent<CanvasGroup>();
                 cg.alpha = 1;

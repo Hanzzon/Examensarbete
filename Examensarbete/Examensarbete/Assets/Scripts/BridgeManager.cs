@@ -15,8 +15,8 @@ public class BridgeManager : MonoBehaviour {
     public Text txtScore;
 
     private int objectsToGather;
-    private string question;
-	private int questionID;
+	public static string question;
+	public static int questionID;
     
     
     // Use this for initialization
@@ -108,7 +108,7 @@ public class BridgeManager : MonoBehaviour {
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(409f, 98f, 0f);
-		MapManager.questions[MapManager.questionIndex].attempt++;
+		//MapManager.questions[MapManager.questionIndex].attempt++;
 
         //MapManager.missionsPlayed++;
 
@@ -124,7 +124,7 @@ public class BridgeManager : MonoBehaviour {
         //mapManager.DestroyPortal(0);
         //mapManager.ChangeSign(0, "Winner");
 
-		mapManager.SelectForDB(score, sum, question, questionID, 1);
+		//mapManager.SelectForDB(score, sum, question, questionID, 1);
 		MapManager.RemoveQuestion (MapManager.questions[MapManager.questionIndex].question);
 
         //MapManager.questionArray[0] = null;

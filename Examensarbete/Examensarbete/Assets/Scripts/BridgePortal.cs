@@ -12,6 +12,10 @@ public class BridgePortal : MonoBehaviour
             if (BridgeManager.sum == BridgeManager.score)
             {
                 print("Winner!");
+				MapManager.questions[MapManager.questionIndex].attempt++;
+				MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
+				mapManager.SelectForDB(BridgeManager.score, BridgeManager.sum, BridgeManager.question, BridgeManager.questionID, 1);
+				MapManager.RemoveQuestion (MapManager.questions[MapManager.questionIndex].question);
                 GameObject obj = GameObject.Find("DialogBoxWinner");
                 CanvasGroup cg = obj.GetComponent<CanvasGroup>();
                 cg.alpha = 1;
