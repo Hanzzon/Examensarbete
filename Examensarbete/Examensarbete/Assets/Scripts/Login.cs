@@ -18,14 +18,14 @@ public class Login : MonoBehaviour {
 
     void Awake()
     {
-        //int idPrefs = PlayerPrefs.GetInt("userid");
-        //int passPrefs = PlayerPrefs.GetInt("password");
+        string idPrefs = PlayerPrefs.GetString("userid");
+        string passPrefs = PlayerPrefs.GetString("password");
 
-        //if (idPrefs > 100 && passPrefs > 100)
-        //{
-        //    user.GetComponent<Text>().text = idPrefs.ToString();
-        //    pass.GetComponent<Text>().text = passPrefs.ToString();
-        //}
+		if (idPrefs.Length > 2 && passPrefs.Length > 2)
+        {
+            user.GetComponent<Text>().text = idPrefs.ToString();
+            pass.GetComponent<Text>().text = passPrefs.ToString();
+        }
     }
 
 	public void LoginUser()
@@ -74,9 +74,9 @@ public class Login : MonoBehaviour {
         {
             if (check)
             {
-                //print("Save userinfo");
-                //PlayerPrefs.SetInt("userid", int.Parse(name));
-                //PlayerPrefs.SetInt("password", int.Parse(pass));
+                print("Save userinfo");
+				PlayerPrefs.SetString("userid", name);
+                PlayerPrefs.SetString("password", pass);
             }
             MapManager.gender = "girl";
             MapManager.userID = int.Parse(result);

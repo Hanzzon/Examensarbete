@@ -291,7 +291,7 @@ public class MapManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("useridPost", userID);
         form.AddField("timerPost", timer);
-        form.AddField("attemptPost", questions[0].attempt);
+		form.AddField("attemptPost", questions[questionIndex].attempt);
         form.AddField("answerPost", answer);
         form.AddField("playedPost", roundsPlayed);
         form.AddField("correctanswerPost", correctAnswer);

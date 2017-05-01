@@ -14,6 +14,7 @@ public class BossManager : MonoBehaviour
 
     private int objectsToGather;
     private string question;
+	private int questionID;
 
     // Use this for initialization
     void Start ()
@@ -32,6 +33,7 @@ public class BossManager : MonoBehaviour
     void ShowInfo()
     {
         string questionDB = MapManager.PickRandomQuestion();
+		questionID = MapManager.questions [MapManager.questionIndex].id;
 
         print("Removed question. Current amount of questions: " + MapManager.questions.Count);
 
@@ -54,10 +56,10 @@ public class BossManager : MonoBehaviour
 
     public void TryAgain()
     {
-        MapManager.questions[1].attempt++;
+		MapManager.questions[MapManager.questionIndex].attempt++;
 
         MapManager mapManagerDB = GameObject.Find("MapManager").GetComponent<MapManager>();
-        mapManagerDB.SelectForDB(score, sum, question);
+		mapManagerDB.SelectForDB(score, sum, question, questionID, 0);
 
         SceneManager.LoadScene("BossBattle");
     }
@@ -66,7 +68,7 @@ public class BossManager : MonoBehaviour
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(1325f, 128f, 0f);
-        MapManager.questions[1].attempt++;
+		MapManager.questions[MapManager.questionIndex].attempt++;
         MapManager.missionsPlayed--;
 
         MapManager mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
@@ -79,7 +81,7 @@ public class BossManager : MonoBehaviour
         print("Missions played: " + MapManager.missionsPlayed);
         //mapManager.ChangeSign(1, "Loser");
 
-        mapManager.SelectForDB(score, sum, question);
+		mapManager.SelectForDB(score, sum, question, questionID, 0);
 
         SceneManager.LoadScene("Map");
     }
@@ -88,7 +90,7 @@ public class BossManager : MonoBehaviour
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(1325f, 128f, 0f);
-        MapManager.questions[1].attempt++;
+		MapManager.questions[MapManager.questionIndex].attempt++;
 
         //MapManager.missionsPlayed++;
 
@@ -103,9 +105,11 @@ public class BossManager : MonoBehaviour
         //mapManager.DestroyPortal(1);
         //mapManager.ChangeSign(1, "Winner");
 
+
         print("Missions played: " + MapManager.missionsPlayed);
 
-        mapManager.SelectForDB(score, sum, question);
+		mapManager.SelectForDB(score, sum, question, questionID, 1);
+		MapManager.RemoveQuestion (MapManager.questions[MapManager.questionIndex].question);
 
         SceneManager.LoadScene("Map");
     }

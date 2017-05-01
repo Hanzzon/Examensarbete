@@ -75,7 +75,7 @@ public class BridgeManager : MonoBehaviour {
 
     public void TryAgain()
     {
-        MapManager.questions[0].attempt++;
+		MapManager.questions[MapManager.questionIndex].attempt++;
 
         MapManager mapManagerDB = GameObject.Find("MapManager").GetComponent<MapManager>();
 		mapManagerDB.SelectForDB(score, sum, question, questionID, 0);
@@ -87,7 +87,7 @@ public class BridgeManager : MonoBehaviour {
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(409f, 98f, 0f);
-        MapManager.questions[0].attempt++;
+		MapManager.questions[MapManager.questionIndex].attempt++;
         MapManager.missionsPlayed--;
 
 
@@ -108,7 +108,7 @@ public class BridgeManager : MonoBehaviour {
     {
         Transform gianaMove = GameObject.Find("Giana").GetComponent<Transform>();
         gianaMove.transform.position = new Vector3(409f, 98f, 0f);
-        MapManager.questions[0].attempt++;
+		MapManager.questions[MapManager.questionIndex].attempt++;
 
         //MapManager.missionsPlayed++;
 
@@ -125,6 +125,7 @@ public class BridgeManager : MonoBehaviour {
         //mapManager.ChangeSign(0, "Winner");
 
 		mapManager.SelectForDB(score, sum, question, questionID, 1);
+		MapManager.RemoveQuestion (MapManager.questions[MapManager.questionIndex].question);
 
         //MapManager.questionArray[0] = null;
 
